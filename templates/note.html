@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="" method="post">
+  <div class="form-group">
+    <label>Title</label>
+    <input class="form-control" type="text" name="title" value="{{ note.title or '' }}"></input>
+  </div>
+  <div class="row">
+    <div class="form-group col-xs-6">
+      <label>Content</label>
+      <textarea class="form-control" id="ascii-source" name="content">{{ note.content or '' }}</textarea>
+    </div>
+    <div class="col-xs-6">
+      <label></label>
+      <div id="ascii-rendering">{{ note.content or '' }}</div>
+    </div>
+  </div>
+  <button type="submit">Save</button>
+</form>
+{% endblock %}
+{% block scripts %}
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  config: ["MMLorHTML.js"],
+  jax: ["input/AsciiMath", "output/NativeMML"],
+  extensions: ["asciimath2jax.js", "fast-preview.js"],
+  });
+</script>
+<script src=https://cdn.mathjax.org/mathjax/latest/MathJax.js></script>
+<script>
+  var asciiSource = document.getElementById('ascii-source');
+  var asciiRendering = document.getElementById('ascii-rendering');
+  asciiSource.addEventListener('input', function() {
+    asciiRendering.innerHTML = asciiSource.value;
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, asciiRendering]);
+  })
+</script>
+{% endblock %}

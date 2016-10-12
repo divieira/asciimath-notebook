@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+  <h2>Notes</h2>
+  <ul>
+    <li><a href="/note/new"><em>Create a new note</em></a></li>
+    {% for note in notes|sort(attribute='modified_at', reverse=True) %}
+    <li><a href="/note/{{ note.id }}">
+        <b>{{ note.title or 'Untitled' }}</b>
+        <em>({{ note.modified_at.strftime('%Y-%m-%d %H:%M:%S') }})</em>
+    </a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
