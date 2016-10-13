@@ -16,3 +16,10 @@
   right: 0px;
   white-space: pre;
 }
+
+#title-container {
+  width: calc(100% - 80px);
+}
+#title {
+  width: 100%;
+}
