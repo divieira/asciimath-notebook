@@ -1,0 +1,18 @@
+#ascii-source, #ascii-rendering {
+  position: fixed;
+  top: 55px;
+  height: calc(100vh - 55px);
+  width: 50%;
+  overflow: scroll;
+  resize: none;
+  border: none;
+}
+
+#ascii-source {
+  left: 0px;
+}
+
+#ascii-rendering {
+  right: 0px;
+  white-space: pre;
+}
