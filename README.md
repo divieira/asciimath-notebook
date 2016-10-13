@@ -33,9 +33,6 @@ https://devcenter.heroku.com/articles/getting-started-with-python#introduction
 
 3. Install the requirements:
 
-    >Note: For Windows, first install psycopg2 following the "Virtual Environment Installation Notes"
-    >from <http://www.stickpeople.com/projects/python/win-psycopg/>._
-
         $ pip install -r requirements.txt
 
 4. Create (or associate with) a Heroku app:
