@@ -59,7 +59,9 @@ https://devcenter.heroku.com/articles/getting-started-with-python#introduction
 
     > Note: If you change or delete a Model class, you may alter or drop the correponding table or `db.drop_all()` (which erases all data)
 
-6. Optional: Initialize database locally (for local testing)
+6. Optional: Initialize database locally and create .env file (for local testing)
+
+        $ echo "DATABASE_URL=postgres:///$(whoami)" > .env
 
         $ python
         >>> from app import db
@@ -74,7 +76,7 @@ https://devcenter.heroku.com/articles/getting-started-with-python#introduction
 
         $ source venv/bin/activate (Unix) or venv\Scripts\activate (Windows) or workon navegatium-hrk (virtualenvwrapper)
 
-2. Start the postgres database (Unix):
+2. Start the postgres database (Unix) and set the `DATABASE_URL` variable, if necessary:
 
         $ postgres -D /usr/local/var/postgres/ & (Unix, if not running on startup)
         $ export DATABASE_URL=postgres:///$(whoami) (Unix) or set DATABASE_URL=%USERNAME% (Windows)
