@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% block title %}{{ note.title }}{% endblock %}
 {% block content %}
-<form action="" method="post">
+<form id="form-note" action="" method="post">
   <div class="form-group">
     <label>Title</label>
     <input class="form-control" type="text" name="title" value="{{ note.title or '' }}"></input>
@@ -15,7 +16,7 @@
       <div id="ascii-rendering">{{ note.content or '' }}</div>
     </div>
   </div>
-  <button type="submit">Save</button>
+  <button class="btn btn-default" type="submit">Save</button>
 </form>
 {% endblock %}
 {% block scripts %}
@@ -26,13 +27,23 @@
   extensions: ["asciimath2jax.js", "fast-preview.js"],
   });
 </script>
-<script src=https://cdn.mathjax.org/mathjax/latest/MathJax.js></script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <script>
-  var asciiSource = document.getElementById('ascii-source');
-  var asciiRendering = document.getElementById('ascii-rendering');
-  asciiSource.addEventListener('input', function() {
-    asciiRendering.innerHTML = asciiSource.value;
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, asciiRendering]);
-  })
+  // Run when DOM has finished loading
+  $(function() {
+    // Enable MathJax rendering
+    var asciiSource = document.getElementById('ascii-source');
+    var asciiRendering = document.getElementById('ascii-rendering');
+    asciiSource.addEventListener('input', function() {
+      asciiRendering.innerHTML = asciiSource.value;
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub, asciiRendering]);
+    })
+
+    // Auto-save changes
+    var $form = $('#form-note');
+    $('input, textarea', $form).change(function() {
+      $.post(window.location.href, $form.serialize());
+    });
+  });
 </script>
 {% endblock %}

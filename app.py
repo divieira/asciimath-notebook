@@ -9,6 +9,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 heroku = Heroku(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Supress warning
 db = SQLAlchemy(app)
 
 app.debug = True
@@ -62,9 +63,9 @@ def note(note_id):
     note = Note.query.get_or_404(note_id)
 
     if request.method == 'POST':
-        # If responding to a POST, update fields from HTML form
-        note.title = request.form.get('title')
-        note.content = request.form.get('content')
+        # If responding to a POST, update fields from HTML form (if present)
+        note.title = request.form.get('title', note.title)
+        note.content = request.form.get('content', note.content)
         note.modified_at = dt.datetime.now()
 
         # And commit instance changes to database
