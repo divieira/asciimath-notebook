@@ -11,6 +11,8 @@
         <b>{{ version.title or 'Untitled' }}</b>
         <em>({{ version.modified_at.strftime('%Y-%m-%d %H:%M:%S') }})</em>
     </a></li>
+    {% else %}
+    <em>No previous verions</em>
     {% endfor %}
   </ul>
 </div>
