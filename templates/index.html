@@ -5,10 +5,11 @@
   <ul>
     <li><a href="/note/new"><em>Create a new note</em></a></li>
     {% for note in notes|sort(attribute='modified_at', reverse=True) %}
-    <li><a href="/note/{{ note.id }}">
-        <b>{{ note.title or 'Untitled' }}</b>
+    <li>
+        <a href="/note/{{ note.id }}"><b>{{ note.title or 'Untitled' }}</b></a>
         <em>({{ note.modified_at.strftime('%Y-%m-%d %H:%M:%S') }})</em>
-    </a></li>
+        <em><a href="/note/{{ note.id }}/versions">(previous versions)</a></em>
+    </li>
     {% endfor %}
   </ul>
 </div>

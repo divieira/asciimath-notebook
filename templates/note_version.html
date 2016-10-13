@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ version.title }}{% endblock %}
+{% block content %}
+<h2>{{ version.title or 'Untitled' }}</h2>
+<div id="ascii-rendering">{{ version.content or '' }}</div>
+{% endblock %}
+{% block scripts %}
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  config: ["MMLorHTML.js"],
+  jax: ["input/AsciiMath", "output/NativeMML"],
+  extensions: ["asciimath2jax.js", "fast-preview.js"],
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+<script>
+  // Run when DOM has finished loading
+  $(function() {
+    var asciiRendering = document.getElementById('ascii-rendering');
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, asciiRendering]);
+  });
+</script>
+{% endblock %}
